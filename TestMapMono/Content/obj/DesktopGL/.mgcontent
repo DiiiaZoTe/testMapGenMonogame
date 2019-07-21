@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>F:/Documents/Projects/TestMapMono/TestMapMono/Content/door0.png</File>
+    <File>F:/Documents/Projects/TestMapMono/TestMapMono/Content/door1.png</File>
+    <File>F:/Documents/Projects/TestMapMono/TestMapMono/Content/door2.png</File>
+    <File>F:/Documents/Projects/TestMapMono/TestMapMono/Content/door3.png</File>
+    <File>F:/Documents/Projects/TestMapMono/TestMapMono/Content/room.png</File>
+    <File>F:/Documents/Projects/TestMapMono/TestMapMono/Content/roomNumber_12.spritefont</File>
+    <File>F:/Documents/Projects/TestMapMono/TestMapMono/Content/roomNumber_8.spritefont</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
