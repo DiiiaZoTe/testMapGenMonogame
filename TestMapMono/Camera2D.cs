@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace TestMapMono {
     class Camera2D {
+        public static Camera2D Instance;
         private Matrix transform;
         public Matrix Transform { get => transform; }
 
@@ -21,16 +22,15 @@ namespace TestMapMono {
         public float Y { get { return centre.Y; } set { centre.Y = value; } }
 
         public float Zoom { get { return zoom; } set { zoom = value; if (zoom < 0.1f) zoom = 0.1f; } }
-        public float Rotation { get => rotation; set => rotation = value; }
 
         public Camera2D(Viewport viewport) {
+            Instance = this;
             this.viewport = viewport;
         }
 
         public void Update(Vector2 position) {
             centre = new Vector2(position.X, position.Y);
             transform = Matrix.CreateTranslation(new Vector3(-centre.X, -centre.Y, 0)) *
-                Matrix.CreateRotationZ(rotation) *
                 Matrix.CreateScale(new Vector3(Zoom, Zoom, 0)) *
                 Matrix.CreateTranslation(new Vector3(viewport.Width / 2, viewport.Height / 2, 0));
         }

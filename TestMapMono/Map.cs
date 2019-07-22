@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace TestMapMono {
     class Map {
@@ -226,11 +227,30 @@ namespace TestMapMono {
             }
         }
 
+        public Room MouseOverRoom() {
+            float w = MyGame.Instance.Window.ClientBounds.Width;
+            float h = MyGame.Instance.Window.ClientBounds.Height;
+            float z = Camera2D.Instance.Zoom;
+            int selectedRow = (int)Math.Floor(
+                    ((Mouse.GetState().Position.Y / z) + ((h - (h / z)) / 2) - this.Y ) / (float)this.DisplaySize
+                );
+            int selectedColumn = (int)Math.Floor(
+                    ((Mouse.GetState().Position.X / z) + ((w - (w / z)) / 2) - this.X) / (float)this.DisplaySize
+                );
+            if (selectedRow >= 0 && selectedRow < this.rows && selectedColumn >= 0 && selectedColumn < this.columns)
+                return this.roomArray[selectedRow, selectedColumn];
+            return null;
+        }
+
         public void Draw(SpriteBatch sb, List<Texture2D> textures, List<SpriteFont> fonts) {
+            Room mouseOver = MouseOverRoom();
             for (int i = 0; i < this.rows; i++) {
                 for (int j = 0; j < this.columns; j++) {
                     if(roomArray[i,j] != null)
-                        roomArray[i, j].Draw(sb, textures, fonts, new Rectangle((int)X + j * this.displaySize, (int)Y + i * this.displaySize, this.displaySize, this.displaySize), this.fursthestRoom.DistanceFromFirst);
+                        if(roomArray[i,j] == mouseOver)
+                            roomArray[i, j].Draw(sb, textures, fonts, new Rectangle((int)X + j * this.displaySize, (int)Y + i * this.displaySize, this.displaySize, this.displaySize), this.fursthestRoom.DistanceFromFirst, true);
+                        else
+                            roomArray[i, j].Draw(sb, textures, fonts, new Rectangle((int)X + j * this.displaySize, (int)Y + i * this.displaySize, this.displaySize, this.displaySize), this.fursthestRoom.DistanceFromFirst);
                 }
             }
         }

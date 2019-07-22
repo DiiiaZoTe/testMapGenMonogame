@@ -51,18 +51,29 @@ namespace TestMapMono {
             }
         }
 
-        public void Draw(SpriteBatch sb, List<Texture2D> textures, List<SpriteFont> fonts, Rectangle pos, int furthestDistance) {
+        public void Draw(SpriteBatch sb, List<Texture2D> textures, List<SpriteFont> fonts, Rectangle pos, int furthestDistance, bool mouseSelected = false) {
             SpriteFont font;
             if (pos.Width < 60)
                 font = fonts[0];
             else
                 font = fonts[1];
-            float lerpAmount = this.roomNumber == 1 ? 0 : 1 / (float)((float)furthestDistance / (float)this.distanceFromFirst);
-            sb.Draw(textures[4], pos, Color.Lerp(Color.White,Color.Maroon, lerpAmount)); //room
-            sb.DrawString(font, this.roomNumber.ToString(), new Vector2(pos.X + pos.Width/3, pos.Y + pos.Height/3), this.roomNumber == 1 ? Color.Black : (lerpAmount < 0.7 ? Color.Black : Color.White)); //room number
-            for (int i = 0; i < 4; i++) {
-                if(this.doors[i] == 1) {
-                    sb.Draw(textures[i], pos, Color.Lerp(Color.WhiteSmoke,Color.Maroon, lerpAmount));
+            if (!mouseSelected) {
+                float lerpAmount = this.roomNumber == 1 ? 0 : 1 / (float)((float)furthestDistance / (float)this.distanceFromFirst);
+                sb.Draw(textures[4], pos, Color.Lerp(Color.White, Color.Maroon, lerpAmount)); //room
+                sb.DrawString(font, this.roomNumber.ToString(), new Vector2(pos.X + pos.Width / 3, pos.Y + pos.Height / 3), this.roomNumber == 1 ? Color.Black : (lerpAmount < 0.7 ? Color.Black : Color.White)); //room number
+                for (int i = 0; i < 4; i++) {
+                    if (this.doors[i] == 1) {
+                        sb.Draw(textures[i], pos, Color.Lerp(Color.WhiteSmoke, Color.Maroon, lerpAmount));
+                    }
+                }
+            }
+            else {
+                sb.Draw(textures[4], pos, Color.LightGreen); //room
+                sb.DrawString(font, this.roomNumber.ToString(), new Vector2(pos.X + pos.Width / 3, pos.Y + pos.Height / 3), Color.Black); //room number
+                for (int i = 0; i < 4; i++) {
+                    if (this.doors[i] == 1) {
+                        sb.Draw(textures[i], pos, Color.LightGreen);
+                    }
                 }
             }
         }

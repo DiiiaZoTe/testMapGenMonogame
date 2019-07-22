@@ -27,8 +27,8 @@ namespace TestMapMono
 
         protected override void Initialize()
         {
-            graphics.PreferredBackBufferWidth = 1600;
-            graphics.PreferredBackBufferHeight = 900;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 800;
             graphics.ApplyChanges();
             // TODO: Add your initialization logic here
             Random rand = new Random();
@@ -86,10 +86,6 @@ namespace TestMapMono
                 camera.Zoom += 0.01f;
             else if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
                 camera.Zoom -= 0.01f;
-            if (Keyboard.GetState().IsKeyDown(Keys.X))
-                camera.Rotation += 0.01f;
-            else if (Keyboard.GetState().IsKeyDown(Keys.W))
-                camera.Rotation -= 0.01f;
 
             // move movement
             float mapSpeed = 5;
@@ -101,8 +97,7 @@ namespace TestMapMono
                 map.X -= mapSpeed;
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
                 map.X += mapSpeed;
-
-
+            
             base.Update(gameTime);
         }
 
